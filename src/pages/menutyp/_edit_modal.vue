@@ -22,6 +22,10 @@
               <input type="text" class="form-control" v-model="editItem.fdesc" />
             </div>
             <div class="form-group">
+              <label>图标</label>
+              <input type="text" class="form-control" v-model="editItem.icon" />
+            </div>
+            <div class="form-group">
               <label>级别</label>
               <select class="form-control" v-model="editItem.typcd">
                 <option value="A">一级分类</option>

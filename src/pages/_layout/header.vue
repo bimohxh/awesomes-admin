@@ -5,7 +5,7 @@
         <div class="d-flex">
           <a class="header-brand" href="../index.html">
             <h4>
-              搭配家开发管理后台
+              管理后台
             </h4>
           </a>
           <div class="d-flex order-lg-2 ml-auto">
