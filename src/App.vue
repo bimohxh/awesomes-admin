@@ -54,14 +54,15 @@ export default {
       window.location.href = '/#/login'
       return
     }
-    try {
-      let res = await this.$axios().get(`developer/current`)
-      this.$store.commit('login', res.data)
-      if (this.$route.name === 'HomeLogin') {
-        window.location.href = '/'
-      }
-    } catch (ex) {
-      this.$alert('danger', '账号或密码错误')
+    let res = await this.$axios().get(`admin/auth`)
+    if (!res.data) {
+      this.$router.push('/login')
+      window.location.href = '/#/login'
+      return
+    }
+    // this.$store.commit('login', res.data)
+    if (this.$route.name === 'HomeLogin') {
+      window.location.href = '/'
     }
   }
 }

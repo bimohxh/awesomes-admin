@@ -8,13 +8,13 @@
       <div class="card-body p-6">
         <div class="form-group">
           <label class="form-label">账号</label>
-          <input type="text" class="form-control"  placeholder="输入账号"  v-model="user.username" @keyup.enter="login">
+          <input type="text" class="form-control"  placeholder="输入账号"  v-model="user.uid" @keyup.enter="login">
         </div>
         <div class="form-group">
           <label class="form-label">
             密码
           </label>
-          <input type="password" class="form-control"  placeholder="输入密码" v-model="user.password" @keyup.enter="login">
+          <input type="password" class="form-control"  placeholder="输入密码" v-model="user.pwd" @keyup.enter="login">
         </div>
         <div class="form-group">
         </div>
@@ -39,20 +39,17 @@ export default {
   },
   methods: {
     login: async function () {
-      try {
-        let res = await this.$axios().get(`developer/login`, {
-          params: this.user
-        })
-        let _token = res.data.token
+      let res = await this.$axios().get(`admin/login`, {
+        params: this.user
+      })
+      if (res.data.status) {
         store.set('login', {
-          token: _token
+          token: res.data.token
         })
-        res = await this.$axios().get(`developer/current`)
-        this.$store.commit('login', res.data)
         window.location.href = '/'
-      } catch (ex) {
-        this.$alert('danger', '账号或密码错误')
+        return
       }
+      this.$alert('danger', '账号或密码错误')
     }
   }
 }
