@@ -8,6 +8,9 @@
       <tr v-for="item in items" :class="'valid-' + item.recsts">
         <td>{{item.id}}</td>
         <td>{{item.full_name}}</td>
+        <td>
+          <img :src="$cdn(item.cover, 'repo', 'subject_repo')" class="scover" />
+        </td>
         <td>{{item.description_cn || item.description}}</td>
         <td>{{item.comment}}</td>
         <td>{{item.using}}</td>
@@ -108,6 +111,10 @@ export default {
 </script>
 
 <style scoped>
+.scover {
+  width: 40px;
+  height: 40px;
+}
 tr.valid-1 {
   color: #c4c3c3;
 }
