@@ -83,7 +83,8 @@ export default {
       repo: {},
       repo_typ: '',
       menutyps: [],
-      submiting: false
+      submiting: false,
+      typmaps: {}
     }
   },
   components: {
@@ -97,7 +98,9 @@ export default {
         }
       })
       let _typs = []
+      let _self = this
       res.data.data[0].items.forEach(item => {
+        _self.typmaps[item.key] = item.sdesc
         if (item.typcd === 'B') {
           let _parent = res.data.data[0].items.find(sub => sub.key === item.parent)
           _typs.push({
@@ -117,6 +120,15 @@ export default {
         this.$alert('danger', '更新失败')
       }
       this.submiting = false
+    }
+  },
+  watch: {
+    repo_typ: function (val) {
+      let _typval = val.split('-')
+      this.repo.rootyp = _typval[0]
+      this.repo.rootyp_zh = this.typmaps[_typval[0]]
+      this.repo.typcd = _typval[1]
+      this.repo.typcd_zh = this.typmaps[_typval[1]]
     }
   },
   async created () {
